@@ -13,7 +13,7 @@ Checks your commit messages and
 
 2. In case you have configured an "allowBranch" in your `lerna.json` make sure that the action ONLY runs in that branch
 
-
+3. In your action make sure to configure the env variable of `PRIVATE_REPO_PAT`
 
 ## Example Usage
 
@@ -36,8 +36,13 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v2.3.1
+        with:
+          # pulls all commits (needed for lerna / semantic release to correctly version)
+          fetch-depth: "0"
 
       - name: Publish 🚀
         uses: LoveToKnow/ltk-publish-lerna-action@main
+        env:
+          PRIVATE_REPO_PAT: ${{ secrets.PRIVATE_REPO_PAT }}
 ```
 

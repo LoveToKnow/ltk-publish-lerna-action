@@ -26,9 +26,9 @@ if jq '.commits[].message, .head_commit.message' < $EVENT_JSON_PATH | grep -q "$
 then
     # Handle major release
     echo "🤖 Publishing a MAJOR release..."
-    npx lerna publish major --conventional-commits --yes
+    npx --userconfig /.npmrc.ci lerna publish major --conventional-commits --yes
 else
     # Let lerna handle the other cases :)
     echo "🤖 Publishing..."
-    npx lerna publish --conventional-commits --yes
+    npx --userconfig /.npmrc.ci lerna publish --conventional-commits --yes
 fi
