@@ -3,7 +3,8 @@ FROM node:12-alpine
 
 # Install tools needed
 RUN apk add --no-cache \
-            jq
+            jq \
+            git
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
