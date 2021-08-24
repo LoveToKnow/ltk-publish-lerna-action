@@ -1,6 +1,6 @@
 #!/bin/sh -l
 
-# Exit immiediately if something goes wrong
+# Exit immediately if something goes wrong
 set -e
 
 echo "🤖 Starting automated publishing..."
@@ -16,7 +16,13 @@ BREAKING_CHANGE="BREAKING CHANGE"
 # git setup
 git config --global user.name '🤖 gh-actions release bot'
 git config --global user.email 'github-actions-release[bot]@users.noreply.github.com'
-git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY
+git remote set-url origin https://x-access-token:${PRIVATE_REPO_PAT}@github.com/$GITHUB_REPOSITORY
+
+# npm setup
+#  remove .npmrc if exists to avoid interference with lerna publishing
+rm -f .npmrc
+#  set .npmrc based on our .npmrc.ci to ensure we always have the correct setup for npm :)
+mv /.npmrc.ci .npmrc
 
 # parse the event json...
 # If it contains the 'BREAKING CHANGE' text it is a MAJOR release
@@ -26,9 +32,9 @@ if jq '.commits[].message, .head_commit.message' < $EVENT_JSON_PATH | grep -q "$
 then
     # Handle major release
     echo "🤖 Publishing a MAJOR release..."
-    npx --userconfig /.npmrc.ci lerna publish major --conventional-commits --yes
+    npx lerna publish major --yes
 else
     # Let lerna handle the other cases :)
     echo "🤖 Publishing..."
-    npx --userconfig /.npmrc.ci lerna publish --conventional-commits --yes
+    npx lerna publish --yes
 fi
