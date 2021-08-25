@@ -17,7 +17,7 @@ Checks your commit messages and
 
 ## Example Usage
 
-The follwing config assumes that
+The following config assumes that
 - The branch used for publishing is the `main` 
 - Only runs for the `push` event
 - Runs only if a change in the `packages` folder has been made
