@@ -14,6 +14,7 @@ BREAKING_CHANGE="BREAKING CHANGE"
 
 
 # git setup
+git config --global --add safe.directory /github/workspace
 git config --global user.name '🤖 gh-actions release bot'
 git config --global user.email 'github-actions-release[bot]@users.noreply.github.com'
 git remote set-url origin https://x-access-token:${PRIVATE_REPO_PAT}@github.com/$GITHUB_REPOSITORY
