@@ -33,9 +33,9 @@ if jq '.commits[].message, .head_commit.message' < $EVENT_JSON_PATH | grep -q "$
 then
     # Handle major release
     echo "🤖 Publishing a MAJOR release..."
-    npx lerna publish major --yes
+    npx lerna@4.0.0 publish major --yes
 else
     # Let lerna handle the other cases :)
     echo "🤖 Publishing..."
-    npx lerna publish --yes
+    npx lerna@4.0.0 publish --yes
 fi
