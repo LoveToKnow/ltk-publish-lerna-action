@@ -1,2 +1,4 @@
-@lovetoknow:registry=https://npm.pkg.github.com
+@lovetoknow:registry=https://npm.pkg.github.com/lovetoknow
+registry=https://registry.npmjs.org
+legacy-peer-deps=true
 //npm.pkg.github.com/:_authToken=${PRIVATE_REPO_PAT}
