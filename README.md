@@ -1,7 +1,7 @@
 # ltk-publish-lerna-action
 Shared github action for automated package publishing in lerna monorepos
 
-This Dockerized action is using **Node v12**
+This Dockerized action is using **Node v16**
 
 ## What it does
 Checks your commit messages and
@@ -41,7 +41,7 @@ jobs:
           fetch-depth: "0"
 
       - name: Publish 🚀
-        uses: LoveToKnow/ltk-publish-lerna-action@main
+        uses: LoveToKnow/ltk-publish-lerna-action@node-16
         env:
           PRIVATE_REPO_PAT: ${{ secrets.PRIVATE_REPO_PAT }}
 ```
